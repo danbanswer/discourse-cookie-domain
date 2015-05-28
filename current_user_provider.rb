@@ -6,4 +6,10 @@ class ExCurrentUserProvider < Auth::DefaultCurrentUserProvider
 
     cookies.permanent[TOKEN_COOKIE] = { value: user.auth_token, httponly: true, domain: :all }
   end
+
+  def log_off_user(session, cookies)
+    super
+    cookies[TOKEN_COOKIE] = {value: "", domain: :all}
+  end
+
 end
